@@ -1,0 +1,181 @@
+package com.example.oscar.myapplication;
+
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    boolean decimal = false;
+    boolean suma = false;
+    boolean resta = false;
+    boolean mult = false;
+    boolean div = false;
+    Double[] num = new Double[25];
+    Double res;
+    String Bor ="";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button n0 = (Button)findViewById(R.id.btn0);
+        n0.setOnClickListener(this);
+        Button n1 = (Button)findViewById(R.id.btn1);
+        n1.setOnClickListener(this);
+        Button n2 = (Button)findViewById(R.id.btn2);
+        n2.setOnClickListener(this);
+        Button n3 = (Button)findViewById(R.id.btn3);
+        n3.setOnClickListener(this);
+        Button n4 = (Button)findViewById(R.id.btn4);
+        n4.setOnClickListener(this);
+        Button n5 = (Button)findViewById(R.id.btn5);
+        n5.setOnClickListener(this);
+        Button n6 = (Button)findViewById(R.id.btn6);
+        n6.setOnClickListener(this);
+        Button n7 = (Button)findViewById(R.id.btn7);
+        n7.setOnClickListener(this);
+        Button n8 = (Button)findViewById(R.id.btn8);
+        n8.setOnClickListener(this);
+        Button n9 = (Button)findViewById(R.id.btn9);
+        n9.setOnClickListener(this);
+
+        Button punto = (Button)findViewById(R.id.btnPunto);
+        punto.setOnClickListener(this);
+        Button sum = (Button)findViewById(R.id.btnSuma);
+        sum.setOnClickListener(this);
+        Button rest = (Button)findViewById(R.id.btnResta);
+        rest.setOnClickListener(this);
+        Button mult = (Button)findViewById(R.id.btnMulti);
+        mult.setOnClickListener(this);
+        Button div = (Button)findViewById(R.id.btnDivicion);
+        div.setOnClickListener(this);
+        Button ac = (Button)findViewById(R.id.btnBorrar);
+        ac.setOnClickListener(this);
+        Button c = (Button)findViewById(R.id.btnC);
+        c.setOnClickListener(this);
+        Button igual = (Button)findViewById(R.id.btnIgual);
+        igual.setOnClickListener(this);
+
+
+    }
+        public void onClick(View view){
+
+            TextView pantalla = (TextView)findViewById(R.id.texto);
+            int seleccion = view.getId();
+            String a = pantalla.getText().toString();
+            try{
+                switch (seleccion){
+                    case R.id.btn0:
+                        pantalla.setText(a+"0");
+                        break;
+                    case R.id.btn1:
+                        pantalla.setText(a+"1");
+                        break;
+                    case R.id.btn2:
+                        pantalla.setText(a+"2");
+                        break;
+                    case R.id.btn3:
+                        pantalla.setText(a+"3");
+                        break;
+                    case R.id.btn4:
+                        pantalla.setText(a+"4");
+                        break;
+                    case R.id.btn5:
+                        pantalla.setText(a+"5");
+                        break;
+                    case R.id.btn6:
+                        pantalla.setText(a+"6");
+                        break;
+                    case R.id.btn7:
+                        pantalla.setText(a+"7");
+                        break;
+                    case R.id.btn8:
+                        pantalla.setText(a+"8");
+                        break;
+                    case R.id.btn9:
+                        pantalla.setText(a+"9");
+                        break;
+                    case R.id.btnPunto:
+                        if(decimal == false) {
+                            pantalla.setText(a + ".");
+                            decimal = true;
+                        }else {return;}
+                        break;
+                    case R.id.btnIgual:
+                        num[1] = Double.parseDouble(a);
+
+                        if(suma == true){
+                            res = num[0] + num[1];
+                            pantalla.setText(String.valueOf(res));
+                            decimal = false;
+                        }else if(resta == true){
+                            res = num[0] - num[1];
+                            pantalla.setText(String.valueOf(res));
+                            decimal = false;
+                        }else if(mult == true){
+                            res = num[0] * num[1];
+                            pantalla.setText(String.valueOf(res));
+                            decimal = false;
+                        }else if(div == true){
+                            res = num[0] / num[1];
+                            pantalla.setText(String.valueOf(res));
+                            decimal = false;
+                        }
+                        suma = false;
+                        resta = false;
+                        mult = false;
+                        div = false;
+                        break;
+                    case R.id.btnSuma:
+                        suma = true;
+                        num[0] = Double.parseDouble(a);
+                        pantalla.setText("");
+                        decimal = false;
+                        break;
+                    case R.id.btnResta:
+                        resta = true;
+                        num[0] = Double.parseDouble(a);
+                        pantalla.setText("");
+                        decimal = false;
+                        break;
+                    case R.id.btnMulti:
+                        mult = true;
+                        num[0] = Double.parseDouble(a);
+                        pantalla.setText("");
+                        decimal = false;
+                        break;
+                    case R.id.btnDivicion:
+                        div = true;
+                        num[0] = Double.parseDouble(a);
+                        pantalla.setText("");
+                        decimal = false;
+                        break;
+                    case R.id.btnC:
+                        pantalla.setText("");
+                        decimal = false;
+                        break;
+                    case R.id.btnBorrar:
+                        String del = "";
+                        for(int i=0; i< pantalla.getText().length()-1; i++){
+                            del = del + pantalla.getText().charAt(i);
+                    }
+                        pantalla.setText(del);
+                        Bor = del;
+                        decimal = false;
+                        break;
+                }
+            }catch (Exception e){
+                pantalla.setText("Error");
+            };
+        }
+
+}
